@@ -1,3 +1,5 @@
+use std::fmt::Display;
+
 use serde::{Deserialize, Serialize};
 
 /// 用户评论的内容
@@ -7,7 +9,7 @@ pub struct Comment {
     pub id: u64,
 
     /// 用户联系方式
-    pub contact: String,
+    pub contact: Option<String>,
 
     /// 用户联系方式类型
     pub contact_type: ContactType,
@@ -25,7 +27,7 @@ pub struct Comment {
     pub is_deleted: bool,
 }
 
-#[derive(Serialize, Deserialize)]
+#[derive(Debug,Clone, Serialize, Deserialize, PartialEq, Eq)]
 pub enum ContactType {
     /// 微信
     Wechat,
@@ -35,4 +37,13 @@ pub enum ContactType {
 
     /// 邮箱
     Email,
+
+    /// 匿名
+    Anonymous,
+}
+
+impl Display for ContactType {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        write!(f, "{:?}", self)
+    }
 }

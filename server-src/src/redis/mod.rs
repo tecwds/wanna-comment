@@ -1,3 +1,5 @@
+mod re_comment;
+
 use once_cell::sync::OnceCell;
 use redis::{Client, Connection, RedisError};
 use std::sync::Mutex;
